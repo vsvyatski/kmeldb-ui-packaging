@@ -1,0 +1,59 @@
+kmeldb-ui (0.4.0-1ppa1~xenial) xenial; urgency=low
+
+  [ Added ]
+  * Ability to safely remove a USB device from the user interface
+
+ -- Vladimir Svyatski <vsvyatski@yandex.ru>  Wed, 27 Mar 2019 20:31:20 +0300
+
+
+kmeldb-ui (0.3.2) unstable; urgency=medium
+
+  [ Fixed ]
+  * DEB package now has priority optional, because extra is deprecated
+  * __pycache__ folder with appropriate permissions is created during the installation for Python to be able to generate precompiled bytecode
+
+ -- Vladimir Svyatski <vsvyatski@yandex.ru>  Mon, 18 Mar 2019 23:33:40 +0300
+
+ 
+kmeldb-ui (0.3.1) unstable; urgency=medium
+
+  [ Fixed ]
+  * Build script to not include __pycache__
+
+ -- Vladimir Svyatski <vsvyatski@yandex.ru>  Sun, 17 Mar 2019 14:17:05 +0300
+
+
+kmeldb-ui (0.3.0) unstable; urgency=low
+
+  [ Added ]
+  * DEB package for Debian, Ubuntu and derived systems
+  * pacman package for ArchLinux and derived systems
+
+ -- Vladimir Svyatski <vsvyatski@yandex.ru>  Sun, 17 Mar 2019 13:30:10 +0300
+
+
+kmeldb-ui (0.2.1) unstable; urgency=low
+
+  [ Fixed ]
+  * A typo in the changelog
+
+ -- Vladimir Svyatski <vsvyatski@yandex.ru>  Sun, 10 Mar 2019 16:19:45 +0300
+
+
+kmeldb-ui (0.2.0) unstable; urgency=low
+
+  [ Added ]
+  * User interface improvements
+  * Ability to show/hide the toolbar
+  * Ability to select the first available drive when USB drive list loads
+  * Russian and Spanish localizations
+  * Ability to switch the application UI languages from the preferences dialog
+
+ -- Vladimir Svyatski <vsvyatski@yandex.ru>  Sun, 10 Mar 2019 15:56:00 +0300
+
+
+kmeldb-ui (0.1.0) unstable; urgency=low
+
+  * Initial application release.
+
+ -- Vladimir Svyatski <vsvyatski@yandex.ru>  Wed, 06 Mar 2019 19:23:32 +0300
