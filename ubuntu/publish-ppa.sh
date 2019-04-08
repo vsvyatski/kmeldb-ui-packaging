@@ -68,21 +68,9 @@ done
 
 thisScriptDir=$(dirname "$0")
 
-# First of all we need to build the distribution
-echo Started application build.
-echo
-sh "$thisScriptDir/build.sh"
-if [ $? != 0 ]
-then
-    printf "${clr_red}ERROR: Distribution build failed, stopping PPA publishing.${clr_end}\n" 1>&2
-    exit 1
-fi
-echo
-echo Finished application build.
-
-outDir="$thisScriptDir/out/ppa"
-packageVersion=$(dpkg-parsechangelog -l "$thisScriptDir/packaging/deb/$distributionTag/debian/changelog" --show-field Version)
-appVersion=$(python3 "$thisScriptDir/packaging/print_version.py")
+outDir="$thisScriptDir/out"
+packageVersion=$(dpkg-parsechangelog -l "$thisScriptDir/$distributionTag/debian/changelog" --show-field Version)
+appVersion=$(awk -v a="$packageVersion" -v b="-" 'BEGIN{print substr(a,1,index(a,b)-1)}')
 packageSrcDir="$outDir/kmeldb-ui_$packageVersion"
 if [ ! -d "$packageSrcDir" ]
 then
@@ -92,17 +80,15 @@ else
 fi
 
 echo Preparing source package...
-# Let's copy the distribution files
-cp -r "$thisScriptDir/dist/kmeldb-ui" "$packageSrcDir"
-cp "$thisScriptDir/packaging/com.github.vsvyatski.kmeldb-ui.desktop" "$packageSrcDir"
-# Let's copy Makefile
-cp "$thisScriptDir/packaging/deb/$distributionTag/Makefile" "$packageSrcDir"
-# We have things ready to create an orig.tar.xz archive
-cd "$packageSrcDir"
-tar -cJf "../kmeldb-ui_$appVersion.orig.tar.xz" *
-cd -
-# And finally, let's copy the debian directory
-cp -r "$thisScriptDir/packaging/deb/$distributionTag/debian" "$packageSrcDir"
+cachedTarball="$thisScriptDir/../cache/kmeldb-ui_$appVersion.tar.gz"
+if [ ! -f "$cachedTarball" ]
+then
+	mkdir -p "$thisScriptDir/../cache"
+	curl -L https://github.com/vsvyatski/kmeldb-ui/archive/v${appVersion}.tar.gz -o "$cachedTarball"
+fi
+cp -T "$cachedTarball" "$outDir/kmeldb-ui_$appVersion.orig.tar.gz"
+tar -xf "$outDir/kmeldb-ui_$appVersion.orig.tar.gz" -C "$packageSrcDir" --strip 1
+cp -r "$thisScriptDir/$distributionTag/debian" "$packageSrcDir"
 
 echo Building package...
 gpgKeyId=551726B7CE345449
