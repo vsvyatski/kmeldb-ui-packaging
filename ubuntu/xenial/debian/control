@@ -4,9 +4,9 @@ Priority: optional
 Maintainer: Vladimir Svyatski <vsvyatski@yandex.ru>
 Build-Depends: debhelper (>= 9), python3-venv (>= 3.5~), python3-wheel (>= 0.29~)
 Standards-Version: 4.1.2
-Homepage: https://github.com/vsvyatski/kmel_db_ui
-Vcs-Git: https://github.com/vsvyatski/kmel_db_ui.git
-Vcs-Browser: https://github.com/vsvyatski/kmel_db_ui
+Homepage: https://vsvyatski.github.io/kmeldb-ui
+Vcs-Git: https://github.com/vsvyatski/kmeldb-ui.git
+Vcs-Browser: https://github.com/vsvyatski/kmeldb-ui
 
 Package: kmeldb-ui
 Architecture: all
