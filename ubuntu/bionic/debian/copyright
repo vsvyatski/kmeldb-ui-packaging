@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: kmeldb-ui
-Source: https://github.com/vsvyatski/kmel_db_ui
+Source: https://github.com/vsvyatski/kmeldb-ui
 
 Files: *
 Copyright: 2019 Vladimir Svyatski <vsvyatski@yandex.ru>
