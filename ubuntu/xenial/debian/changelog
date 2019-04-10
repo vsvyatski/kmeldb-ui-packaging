@@ -1,4 +1,4 @@
-kmeldb-ui (0.4.0-1ppa1~xenial) xenial; urgency=low
+kmeldb-ui (0.4.0-1ppa2~xenial) xenial; urgency=low
 
   [ Added ]
   * Ability to safely remove a USB device from the user interface
