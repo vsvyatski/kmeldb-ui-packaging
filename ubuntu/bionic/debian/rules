@@ -2,5 +2,23 @@
 # output every command that modifies files on the build system.
 #export DH_VERBOSE = 1
 
+DESTDIR := debian/kmeldb-ui
+OPTDIR := opt
+SHAREDIR := usr/share
+
 %:
 	dh $@
+
+override_dh_auto_build:
+	sh build.sh
+
+override_dh_auto_install:
+	dh_auto_install --destdir=${DESTDIR}
+	mkdir -p ${DESTDIR}/${OPTDIR}
+	cp -r dist/kmeldb-ui ${DESTDIR}/${OPTDIR}
+	mkdir -p ${DESTDIR}/${SHAREDIR}/applications
+	cp packaging/com.github.vsvyatski.kmeldb-ui.desktop ${DESTDIR}/${SHAREDIR}/applications
+
+override_dh_auto_clean:
+	rm -rf dist
+	dh_auto_clean
