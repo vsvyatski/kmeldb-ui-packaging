@@ -11,6 +11,9 @@ SHAREDIR := usr/share
 
 override_dh_auto_build:
 	sh build.sh
+	@echo Generating virtual environment...
+	python3 -m venv --system-site-packages dist/kmeldb-ui/venv
+	dist/kmeldb-ui/venv/bin/pip3 install --no-index --find-links=debian/wheel -r dist/kmeldb-ui/requirements.txt
 
 override_dh_auto_install:
 	dh_auto_install --destdir=${DESTDIR}

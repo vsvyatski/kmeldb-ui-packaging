@@ -89,6 +89,7 @@ fi
 cp -T "$cachedTarball" "$outDir/kmeldb-ui_$appVersion.orig.tar.gz"
 tar -xf "$outDir/kmeldb-ui_$appVersion.orig.tar.gz" -C "$packageSrcDir" --strip 1
 cp -r "$thisScriptDir/$distributionTag/debian" "$packageSrcDir"
+pip3 download -d "$packageSrcDir/debian/wheel" -r "$packageSrcDir/src/requirements.txt"
 
 echo Building package...
 gpgKeyId=551726B7CE345449
