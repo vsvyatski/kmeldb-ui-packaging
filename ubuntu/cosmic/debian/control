@@ -1,0 +1,16 @@
+Source: kmeldb-ui
+Section: utils
+Priority: optional
+Maintainer: Vladimir Svyatski <vsvyatski@yandex.ru>
+Build-Depends: debhelper (>= 11), rsync (>= 3.1.2), python3 (>= 3.6~), python3-venv (>= 3.6~), python3-wheel (>= 0.30~)
+Standards-Version: 4.1.2
+Homepage: https://vsvyatski.github.io/kmeldb-ui
+Vcs-Git: https://github.com/vsvyatski/kmeldb-ui.git
+Vcs-Browser: https://github.com/vsvyatski/kmeldb-ui
+
+Package: kmeldb-ui
+Architecture: all
+Depends: ${misc:Depends}, python3-pyqt5 (>= 5.11~)
+Recommends: qttranslations5-l10n (>= 5.11~)
+Description: Kenwood Music Editor Light replacement for Linux systems.
+  This is a GUI application that can generate Kenwood DAP databases on a selected FAT32 formatted USB drive. The database is used by Kenwood car audio systems to allow searching by album, title, genre and artist. It also allows creation of playlists.
