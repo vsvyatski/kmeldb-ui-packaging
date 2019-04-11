@@ -1,4 +1,4 @@
-kmeldb-ui (0.4.0-1ppa3~bionic) bionic; urgency=low
+kmeldb-ui (0.4.0-1ppa4~bionic) bionic; urgency=low
 
   [ Added ]
   * Ability to safely remove a USB device from the user interface

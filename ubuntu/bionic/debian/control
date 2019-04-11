@@ -2,7 +2,7 @@ Source: kmeldb-ui
 Section: utils
 Priority: optional
 Maintainer: Vladimir Svyatski <vsvyatski@yandex.ru>
-Build-Depends: debhelper (>= 10), rsync (>= 3.1.2), python3-venv (>= 3.6~), python3-wheel (>= 0.29~)
+Build-Depends: debhelper (>= 10), rsync (>= 3.1.2), python3 (>= 3.6~), python3-venv (>= 3.6~), python3-wheel (>= 0.29~)
 Standards-Version: 4.1.2
 Homepage: https://vsvyatski.github.io/kmeldb-ui
 Vcs-Git: https://github.com/vsvyatski/kmeldb-ui.git
