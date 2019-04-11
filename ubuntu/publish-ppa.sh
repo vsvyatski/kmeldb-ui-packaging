@@ -29,6 +29,7 @@ usage() {
     echo '     supported distributions:'
     echo '       xenial - Xenial Xerus (16.04.* LTS). Used as a default if -d is not provided'
     echo '       bionic - Bionic Beaver (18.04.* LTS)'
+	echo '	-n						do not upload to Launchpad'
 }
 
 checkDistribution() {
@@ -38,7 +39,9 @@ checkDistribution() {
 # Xenial Xerus (the oldest supported distribution) is the default for this script if not told otherwise
 distributionTag=xenial
 
-while getopts ":d:h" opt; do
+upload=true
+
+while getopts ":d:hn" opt; do
 	case ${opt} in
 	    h)
 	        usage
@@ -52,6 +55,9 @@ while getopts ":d:h" opt; do
                 usage
                 exit 1
 			fi
+			;;
+		n)
+			upload=false
 			;;
 		\?)
 			printf "${clr_red}ERROR: Unrecognized option -$OPTARG.${clr_end}\n" 1>&2
@@ -91,8 +97,20 @@ tar -xf "$outDir/kmeldb-ui_$appVersion.orig.tar.gz" -C "$packageSrcDir" --strip 
 cp -r "$thisScriptDir/$distributionTag/debian" "$packageSrcDir"
 pip3 download -d "$packageSrcDir/debian/wheel" -r "$packageSrcDir/src/requirements.txt"
 
-echo Building package...
-gpgKeyId=551726B7CE345449
+GPG_KEY_ID=551726B7CE345449
+DESTINATION_PPA='ppa:vsvyatski/kmeldb-ui'
+
+echo 'Building source package...'
 cd "$packageSrcDir"
-debuild -S --sign-key=$gpgKeyId
+debuild -S --sign-key=$GPG_KEY_ID
 cd -
+
+if [ ${upload} = true ]
+then
+	echo Uploading to Launchpad...
+	cd "$outDir"
+	dput $DESTINATION_PPA "$(basename "$packageSrcDir")_source.changes"
+	cd -
+fi
+
+echo 'Publishing is done.'
