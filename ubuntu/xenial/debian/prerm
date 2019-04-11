@@ -2,7 +2,7 @@
 
 set -e
 
-if [ "$1" == "remove" -o "$1" == "upgrade" ]
+if [ "$1" = "remove" -o "$1" = "upgrade" ]
 then
     if [ -d /opt/kmeldb-ui ]
     then
