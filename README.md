@@ -4,7 +4,7 @@ The repository contains the code necessary to build packages for different Linux
 
 ## ubuntu
 
-This stuff is responsible for building source code packages for Launchpad PPA and uploading them. To do so, use _publish-ppa.sh_:
+This stuff is responsible for building source code packages for [Launchpad PPA](https://launchpad.net/~vsvyatski/+archive/ubuntu/kmeldb-ui) and uploading them. To do so, use _publish-ppa.sh_:
 
 ```console
 Usage:
