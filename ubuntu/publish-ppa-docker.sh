@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# This file may be needed if you want to build the source package for more fresh version of Ubuntu
+# than the one you use. For instance, I can't build the package for Disco Dingo being on Bionic Beaver:
+# debuild complains about unsatisfied dependencies. Docker can help here.
+
 case "$BASH" in
 	*/bash)
 		isBash=true
@@ -21,7 +25,7 @@ fi
 
 usage() {
 	echo 'Usage:'
-	echo '  publish-ppa.sh [options]'
+	echo '  publish-ppa-docker.sh [options]'
 	echo
 	echo 'options:'
 	echo '  -h                      display this help message and exit'
@@ -75,44 +79,12 @@ while getopts ":d:hn" opt; do
 done
 
 thisScriptDir=$(dirname "$0")
+dockerTmpDir="$thisScriptDir/out/docker-tmp"
 
-outDir="$thisScriptDir/out"
-packageVersion=$(dpkg-parsechangelog -l "$thisScriptDir/$distributionTag/debian/changelog" --show-field Version)
-appVersion=$(awk -v a="$packageVersion" -v b="-" 'BEGIN{print substr(a,1,index(a,b)-1)}')
-packageSrcDir="$outDir/kmeldb-ui_$packageVersion"
-if [ ! -d "$packageSrcDir" ]
-then
-	mkdir -p "$packageSrcDir"
-else
-	rm -r -f "$packageSrcDir/"*
-fi
+mkdir -p "$dockerTmpDir"
+[ ! -d "$dockerTmpDir/gnupg" ] && cp -a ~/.gnupg/. "$dockerTmpDir/gnupg"
 
-echo Preparing source package...
-cachedTarball="$thisScriptDir/../cache/kmeldb-ui_$appVersion.tar.gz"
-if [ ! -f "$cachedTarball" ]
-then
-	mkdir -p "$thisScriptDir/../cache"
-	curl -L https://github.com/vsvyatski/kmeldb-ui/archive/v${appVersion}.tar.gz -o "$cachedTarball"
-fi
-cp -T "$cachedTarball" "$outDir/kmeldb-ui_$appVersion.orig.tar.gz"
-tar -xf "$outDir/kmeldb-ui_$appVersion.orig.tar.gz" -C "$packageSrcDir" --strip 1
-cp -r "$thisScriptDir/$distributionTag/debian" "$packageSrcDir"
-pip3 download -d "$packageSrcDir/debian/wheel" -r "$packageSrcDir/src/requirements.txt"
-
-GPG_KEY_FINGERPRINT=0DD4B77316E9B98475C60931551726B7CE345449
-DESTINATION_PPA='ppa:vsvyatski/kmeldb-ui'
-
-echo 'Building source package...'
-cd "$packageSrcDir"
-debuild -S --sign-key=$GPG_KEY_FINGERPRINT
+cd "$thisScriptDir/$distributionTag"
+docker-compose build
+docker-compose run source_package
 cd -
-
-if [ ${upload} = true ]
-then
-	echo Uploading to Launchpad...
-	cd "$outDir"
-	dput $DESTINATION_PPA "$(basename "$packageSrcDir")_source.changes"
-	cd -
-fi
-
-echo 'Publishing is done.'

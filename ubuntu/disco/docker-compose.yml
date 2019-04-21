@@ -1,0 +1,10 @@
+version: "3.5"
+services:
+  source_package:
+    build:
+      context: ../..
+      dockerfile: ubuntu/disco/Dockerfile
+    command: sh publish-ppa.sh -d disco -n
+    volumes:
+      - ../out:/repository/ubuntu/out
+    working_dir: /repository/ubuntu
