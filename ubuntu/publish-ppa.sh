@@ -30,11 +30,12 @@ usage() {
 	echo '       xenial - Xenial Xerus (16.04.* LTS). Used as a default if -d is not provided'
 	echo '       bionic - Bionic Beaver (18.04.* LTS)'
 	echo '       cosmic - Cosmic Cuttlefish (18.10)'
+	echo '       disco  - Disco Dingo (19.04)'
 	echo '  -n                      do not upload to Launchpad'
 }
 
 checkDistribution() {
-	test $1 = xenial -o $1 = bionic -o $1 = cosmic
+	test $1 = xenial -o $1 = bionic -o $1 = cosmic -o $1 = disco
 }
 
 # Xenial Xerus (the oldest supported distribution) is the default for this script if not told otherwise

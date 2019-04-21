@@ -17,5 +17,6 @@ options:
        xenial - Xenial Xerus (16.04.* LTS). Used as a default if -d is not provided
        bionic - Bionic Beaver (18.04.* LTS)
        cosmic - Cosmic Cuttlefish (18.10)
+       disco  - Disco Dingo (19.04)
   -n                      do not upload to Launchpad
 ```
