@@ -2,7 +2,8 @@
 
 # This file may be needed if you want to build the source package for more fresh version of Ubuntu
 # than the one you use. For instance, I can't build the package for Disco Dingo being on Bionic Beaver:
-# debuild complains about unsatisfied dependencies. Docker can help here.
+# debuild complains about unsatisfied dependencies. Docker can help here. Another place where this
+# script can be suitable, is building Ubuntu source packages from non Ubuntu-based distros, like Arch Linux.
 
 case "$BASH" in
 	*/bash)
@@ -85,6 +86,6 @@ mkdir -p "$dockerTmpDir"
 [ ! -d "$dockerTmpDir/gnupg" ] && cp -a ~/.gnupg/. "$dockerTmpDir/gnupg"
 
 cd "$thisScriptDir/$distributionTag"
-docker-compose build
+docker-compose build --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) source_package
 docker-compose run source_package
 cd -

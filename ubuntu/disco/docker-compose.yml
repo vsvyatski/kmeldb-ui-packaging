@@ -6,5 +6,5 @@ services:
       dockerfile: ubuntu/disco/Dockerfile
     command: sh publish-ppa.sh -d disco -n
     volumes:
-      - ../out:/repository/ubuntu/out
-    working_dir: /repository/ubuntu
+      - ../out:/home/builder/kmeldb-ui/ubuntu/out
+    working_dir: /home/builder/kmeldb-ui/ubuntu
