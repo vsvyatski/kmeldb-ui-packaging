@@ -20,3 +20,4 @@ COPY --chown=builder:builder ubuntu/disco ubuntu/disco
 COPY --chown=builder:builder ubuntu/publish-ppa.sh ubuntu/
 
 COPY --chown=builder:builder ubuntu/out/docker-tmp/gnupg /home/${USER_NAME}/.gnupg
+RUN chmod 700 /home/${USER_NAME}/.gnupg

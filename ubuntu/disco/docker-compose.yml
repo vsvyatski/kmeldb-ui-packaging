@@ -4,7 +4,7 @@ services:
     build:
       context: ../..
       dockerfile: ubuntu/disco/Dockerfile
-    command: sh publish-ppa.sh -d disco -n
+    command: sh -c 'if [ -z $${UPLOAD} ]; then sh publish-ppa.sh -d disco -n; else sh publish-ppa.sh -d disco; fi'
     volumes:
       - ../out:/home/builder/kmeldb-ui/ubuntu/out
     working_dir: /home/builder/kmeldb-ui/ubuntu

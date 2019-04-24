@@ -87,5 +87,10 @@ mkdir -p "$dockerTmpDir"
 
 cd "$thisScriptDir/$distributionTag"
 docker-compose build --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) source_package
-docker-compose run source_package
+if [ ${upload} = true ]
+then
+	docker-compose run -e UPLOAD=true source_package
+else
+	docker-compose run source_package
+fi
 cd -
