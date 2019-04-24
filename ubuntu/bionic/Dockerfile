@@ -16,7 +16,7 @@ RUN mkdir -p /home/${USER_NAME}/kmeldb-ui
 WORKDIR /home/${USER_NAME}/kmeldb-ui
 
 # parameters for --chown are not supported yet (Docker 18.09.5), I can't use variables
-COPY --chown=builder:builder ubuntu/disco ubuntu/disco
+COPY --chown=builder:builder ubuntu/bionic ubuntu/bionic
 COPY --chown=builder:builder ubuntu/publish-ppa.sh ubuntu/
 
 COPY --chown=builder:builder ubuntu/out/docker-tmp/gnupg /home/${USER_NAME}/.gnupg
