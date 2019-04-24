@@ -85,12 +85,10 @@ dockerTmpDir="$thisScriptDir/out/docker-tmp"
 mkdir -p "$dockerTmpDir"
 [ ! -d "$dockerTmpDir/gnupg" ] && cp -a ~/.gnupg/. "$dockerTmpDir/gnupg"
 
-cd "$thisScriptDir/$distributionTag"
-docker-compose build --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) source_package
+SERIES=${distributionTag} docker-compose build --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) source_package
 if [ ${upload} = true ]
 then
-	docker-compose run -e UPLOAD=true source_package
+	docker-compose run -e SERIES=${distributionTag} -e UPLOAD=true source_package
 else
-	docker-compose run source_package
+	docker-compose run -e SERIES=${distributionTag} source_package
 fi
-cd -

@@ -3,7 +3,7 @@ kmeldb-ui (0.4.0-1ppa1~disco) disco; urgency=low
   [ Added ]
   * Ability to safely remove a USB device from the user interface
 
- -- Vladimir Svyatski <vsvyatski@yandex.ru>  Sun, 21 Apr 2019 14:33:15 +0300
+ -- Vladimir Svyatski <vsvyatski@yandex.ru>  Wed, 24 Apr 2019 13:38:49 +0300
 
 
 kmeldb-ui (0.3.2) unstable; urgency=medium

@@ -2,9 +2,9 @@ version: "3.5"
 services:
   source_package:
     build:
-      context: ../..
-      dockerfile: ubuntu/disco/Dockerfile
-    command: sh -c 'if [ -z $${UPLOAD} ]; then sh publish-ppa.sh -d disco -n; else sh publish-ppa.sh -d disco; fi'
+      context: ..
+      dockerfile: ubuntu/${SERIES}/Dockerfile
+    command: sh -c 'if [ -z $${UPLOAD} ]; then sh publish-ppa.sh -d $${SERIES} -n; else sh publish-ppa.sh -d $${SERIES}; fi'
     volumes:
-      - ../out:/home/builder/kmeldb-ui/ubuntu/out
+      - ./out:/home/builder/kmeldb-ui/ubuntu/out
     working_dir: /home/builder/kmeldb-ui/ubuntu
