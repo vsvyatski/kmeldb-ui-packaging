@@ -1,0 +1,9 @@
+version: "3.5"
+services:
+  pacman_package:
+    build:
+      context: .
+    command: sh build.sh
+    volumes:
+      - ./out:/home/builder/kmeldb-ui-packaging/out
+    working_dir: /home/builder/kmeldb-ui-packaging

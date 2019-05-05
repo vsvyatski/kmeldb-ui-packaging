@@ -12,8 +12,8 @@ RUN groupadd -g ${GROUP_ID} ${GROUP_NAME} && useradd -l -u ${USER_ID} -g ${GROUP
 
 USER ${USER_NAME}
 
-RUN mkdir -p /home/${USER_NAME}/kmeldb-ui
-WORKDIR /home/${USER_NAME}/kmeldb-ui
+RUN mkdir -p /home/${USER_NAME}/kmeldb-ui-packaging
+WORKDIR /home/${USER_NAME}/kmeldb-ui-packaging
 
 # parameters for --chown are not supported yet (Docker 18.09.5), I can't use variables
 COPY --chown=builder:builder ubuntu/cosmic ubuntu/cosmic

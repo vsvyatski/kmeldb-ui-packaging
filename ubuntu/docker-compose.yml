@@ -6,5 +6,5 @@ services:
       dockerfile: ubuntu/${SERIES}/Dockerfile
     command: sh -c 'if [ -z $${UPLOAD} ]; then sh publish-ppa.sh -d $${SERIES} -n; else sh publish-ppa.sh -d $${SERIES}; fi'
     volumes:
-      - ./out:/home/builder/kmeldb-ui/ubuntu/out
-    working_dir: /home/builder/kmeldb-ui/ubuntu
+      - ./out:/home/builder/kmeldb-ui-packaging/ubuntu/out
+    working_dir: /home/builder/kmeldb-ui-packaging/ubuntu
