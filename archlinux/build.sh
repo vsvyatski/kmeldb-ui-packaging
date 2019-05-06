@@ -23,12 +23,7 @@ fi
 
 thisScriptDir=$(dirname "$0")
 outDir="$thisScriptDir/out"
-if [ ! -d "$outDir" ]
-then
-	mkdir "$outDir"
-else
-	rm -rf "$outDir/"*
-fi
+mkdir -p "$outDir"
 
 if [ ! -f /usr/bin/makepkg ]
 then
@@ -40,6 +35,8 @@ then
 fi
 
 packageMaintainer="Vladimir Svyatski <vsvyatski@yandex.ru>"
+
+rm -rf "$outDir/"*
 
 cd "$thisScriptDir"
 makepkg -f PACKAGER="$packageMaintainer" BUILDDIR="$outDir" SRCDEST="$outDir" PKGDEST="$outDir"

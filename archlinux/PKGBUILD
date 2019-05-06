@@ -38,5 +38,7 @@ check() {
 }
 
 package() {
-    echo Packaging...
+    cd "$pkgname-$pkgver"
+    mkdir "$pkgdir/opt" && cp -r dist/kmeldb-ui "$pkgdir/opt"
+    mkdir -p "$pkgdir/usr/share/applications/" && cp packaging/com.github.vsvyatski.kmeldb-ui.desktop "$pkgdir/usr/share/applications"
 }
