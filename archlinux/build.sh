@@ -12,11 +12,9 @@ esac
 # Let's define some colors
 if [ ${isBash} = true ]
 then
-    clr_red=$'\e[1;31m'
     clr_yellow=$'\e[1;33m'
     clr_end=$'\e[0m'
 else
-    clr_red=''
     clr_yellow=''
     clr_end=''
 fi
