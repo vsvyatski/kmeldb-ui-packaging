@@ -5,5 +5,5 @@ services:
       context: .
     command: sh build.sh
     volumes:
-      - ./out:/home/builder/kmeldb-ui-packaging/out
+      - .:/home/builder/kmeldb-ui-packaging
     working_dir: /home/builder/kmeldb-ui-packaging

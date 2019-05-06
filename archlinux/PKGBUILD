@@ -22,6 +22,21 @@ build() {
     dist/kmeldb-ui/venv/bin/pip3 install -r dist/kmeldb-ui/requirements.txt
 }
 
+check() {
+    # Let's quickly verify if the contents of the "dist" folder after building look fine.
+    set -e
+
+    cd "$pkgname-$pkgver"
+    test -d dist/kmeldb-ui
+
+    cd dist/kmeldb-ui
+    test -d kmeldb_cli -a -d translations -a -d venv
+    test $(find -maxdepth 1 -type f -name "*.py" | wc -l) = 11
+    test $(find -maxdepth 1 -type f -name "*.sh" | wc -l) = 2
+    test -f kenwooddbgen.png
+    test -f LICENSE -a -f requirements.txt
+}
+
 package() {
     echo Packaging...
 }
