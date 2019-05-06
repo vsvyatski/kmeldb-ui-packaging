@@ -2,8 +2,9 @@ version: "3.5"
 services:
   pacman_package:
     build:
-      context: .
+      context: ..
+      dockerfile: archlinux/Dockerfile
     command: sh build.sh
     volumes:
-      - .:/home/builder/kmeldb-ui-packaging
-    working_dir: /home/builder/kmeldb-ui-packaging
+      - ./out:/home/builder/kmeldb-ui-packaging/archlinux/out
+    working_dir: /home/builder/kmeldb-ui-packaging/archlinux

@@ -16,6 +16,6 @@ RUN mkdir -p /home/${USER_NAME}/kmeldb-ui-packaging
 WORKDIR /home/${USER_NAME}/kmeldb-ui-packaging
 
 # parameters for --chown are not supported yet (Docker 18.09.5), I can't use variables
-COPY --chown=builder:builder install-actions.sh ./
-COPY --chown=builder:builder PKGBUILD ./
-COPY --chown=builder:builder build.sh ./
+COPY --chown=builder:builder archlinux/install-actions.sh archlinux/
+COPY --chown=builder:builder archlinux/PKGBUILD archlinux/
+COPY --chown=builder:builder archlinux/build.sh archlinux/
