@@ -22,3 +22,7 @@ options:
 ```
 
 It is not always possible to build for a selected series on a given machine. For instance, you have Bionic Beaver and want to build for Disco Dingo. For that purpose there exists another script - _publish-ppa-docker.sh_. It accepts exactly the same options as _publish-ppa.sh_, but the build is performed by the means of Docker.
+
+## archlinux
+
+Here you can build the package for Pacman-powered systems like Arch Linux. Just run _build.sh_ and you're good to go. The resulting package can be found inside the _archlinux/out_ folder. I have an [AUR package](https://aur.archlinux.org/packages/kmeldb-ui) set up that contains certain files from the _archlinux_ folder and can be used by anyone.
