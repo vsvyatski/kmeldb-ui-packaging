@@ -24,22 +24,22 @@ usage() {
 	echo '  publish-ppa.sh [options]'
 	echo
 	echo 'options:'
-	echo '  -h                      display this help message and exit'
-	echo '  -d <distribution_tag>   publish for a given distribution'
-	echo '     supported distributions:'
+	echo '  -h                 display this help message and exit'
+	echo '  -d <series_tag>    publish for a given series'
+	echo '     supported series:'
 	echo '       xenial - Xenial Xerus (16.04.* LTS). Used as a default if -d is not provided'
 	echo '       bionic - Bionic Beaver (18.04.* LTS)'
 	echo '       cosmic - Cosmic Cuttlefish (18.10)'
 	echo '       disco  - Disco Dingo (19.04)'
-	echo '  -n                      do not upload to Launchpad'
+	echo '  -n                 do not upload to Launchpad'
 }
 
-checkDistribution() {
+checkSeries() {
 	test $1 = xenial -o $1 = bionic -o $1 = cosmic -o $1 = disco
 }
 
-# Xenial Xerus (the oldest supported distribution) is the default for this script if not told otherwise
-distributionTag=xenial
+# Xenial Xerus (the oldest supported series) is the default for this script if not told otherwise
+seriesTag=xenial
 
 upload=true
 
@@ -50,10 +50,10 @@ while getopts ":d:hn" opt; do
 			exit
 			;;
 		d)
-			distributionTag=$OPTARG
-			if ! checkDistribution $distributionTag
+			seriesTag=$OPTARG
+			if ! checkSeries $seriesTag
 			then
-				printf "${clr_red}ERROR: Unrecognized Ubuntu distribution '$distributionTag'.${clr_end}\n" 1>&2
+				printf "${clr_red}ERROR: Unrecognized Ubuntu series '$seriesTag'.${clr_end}\n" 1>&2
 				usage
 				exit 1
 			fi
@@ -77,7 +77,7 @@ done
 thisScriptDir=$(dirname "$0")
 
 outDir="$thisScriptDir/out"
-packageVersion=$(dpkg-parsechangelog -l "$thisScriptDir/$distributionTag/debian/changelog" --show-field Version)
+packageVersion=$(dpkg-parsechangelog -l "$thisScriptDir/$seriesTag/debian/changelog" --show-field Version)
 appVersion=$(awk -v a="$packageVersion" -v b="-" 'BEGIN{print substr(a,1,index(a,b)-1)}')
 packageSrcDir="$outDir/kmeldb-ui_$packageVersion"
 if [ ! -d "$packageSrcDir" ]
@@ -96,7 +96,7 @@ then
 fi
 cp -T "$cachedTarball" "$outDir/kmeldb-ui_$appVersion.orig.tar.gz"
 tar -xf "$outDir/kmeldb-ui_$appVersion.orig.tar.gz" -C "$packageSrcDir" --strip 1
-cp -r "$thisScriptDir/$distributionTag/debian" "$packageSrcDir"
+cp -r "$thisScriptDir/$seriesTag/debian" "$packageSrcDir"
 pip3 download -d "$packageSrcDir/debian/wheel" -r "$packageSrcDir/src/requirements.txt"
 
 GPG_KEY_FINGERPRINT=0DD4B77316E9B98475C60931551726B7CE345449
