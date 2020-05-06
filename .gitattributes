@@ -1,4 +1,4 @@
 * text=auto
 
-ubuntu/* text eol=lf
+ubuntu/**/* text eol=lf
 archlinux/* text eol=lf
