@@ -38,6 +38,10 @@ checkSeries() {
 	test $1 = xenial -o $1 = bionic -o $1 = cosmic -o $1 = disco
 }
 
+error() {
+	printf "${clr_red}ERROR: $1${clr_end}\n" 1>&2
+}
+
 # Xenial Xerus (the oldest supported series) is the default for this script if not told otherwise
 seriesTag=xenial
 
@@ -53,7 +57,7 @@ while getopts ":d:hn" opt; do
 			seriesTag=$OPTARG
 			if ! checkSeries $seriesTag
 			then
-				printf "${clr_red}ERROR: Unrecognized Ubuntu series '$seriesTag'.${clr_end}\n" 1>&2
+				error "Unrecognized Ubuntu series '$seriesTag'."
 				usage
 				exit 1
 			fi
@@ -62,12 +66,12 @@ while getopts ":d:hn" opt; do
 			upload=false
 			;;
 		\?)
-			printf "${clr_red}ERROR: Unrecognized option -$OPTARG.${clr_end}\n" 1>&2
+			error "Unrecognized option -$OPTARG."
 			usage
 			exit 1
 			;;
 		:)
-			printf "${clr_red}ERROR: Option -$OPTARG requires an argument.${clr_end}\n" 1>&2
+			error "Option -$OPTARG requires an argument."
 			usage
 			exit 1
 			;;
