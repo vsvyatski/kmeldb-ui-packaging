@@ -32,23 +32,23 @@ usage() {
 	echo '  -h                 display this help message and exit'
 	echo '  -d <series_tag>    publish for a given series'
 	echo '     supported series:'
-	echo '       xenial - Xenial Xerus (16.04.* LTS). Used as a default if -d is not provided'
+	echo '       xenial - Xenial Xerus (16.04.* LTS)'
 	echo '       bionic - Bionic Beaver (18.04.* LTS)'
-	echo '       cosmic - Cosmic Cuttlefish (18.10)'
-	echo '       disco  - Disco Dingo (19.04)'
+	echo '       eoan   - Eoan Ermine (19.10)'
+	echo '       focal  - Focal Fossa (20.04.* LTS). Used as a default if -d is not provided'
 	echo '  -n                 do not upload to Launchpad'
 }
 
 checkSeries() {
-	test $1 = xenial -o $1 = bionic -o $1 = cosmic -o $1 = disco
+	test $1 = xenial -o $1 = bionic -o $1 = eoan -o $1 = focal
 }
 
 error() {
 	printf "${clr_red}ERROR: $1${clr_end}\n" 1>&2
 }
 
-# Xenial Xerus (the oldest supported series) is the default for this script if not told otherwise
-seriesTag=xenial
+# Focal Fossa is the default for this script if not told otherwise
+seriesTag=focal
 
 upload=true
 

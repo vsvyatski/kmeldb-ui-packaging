@@ -1,4 +1,4 @@
-FROM ubuntu:19.04
+FROM ubuntu:19.10
 
 ARG USER_ID
 ARG GROUP_ID
@@ -16,7 +16,7 @@ RUN mkdir -p /home/${USER_NAME}/kmeldb-ui-packaging
 WORKDIR /home/${USER_NAME}/kmeldb-ui-packaging
 
 # parameters for --chown are not supported yet (Docker 18.09.5), I can't use variables
-COPY --chown=builder:builder ubuntu/disco ubuntu/disco
+COPY --chown=builder:builder ubuntu/eoan ubuntu/eoan
 COPY --chown=builder:builder ubuntu/publish-ppa.sh ubuntu/
 
 COPY --chown=builder:builder ubuntu/out/docker-tmp/gnupg /home/${USER_NAME}/.gnupg
