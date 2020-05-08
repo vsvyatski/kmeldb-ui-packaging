@@ -1,4 +1,8 @@
 * text=auto
 
-ubuntu/**/* text eol=lf
+ubuntu/bionic/**/* text eol=lf
+ubuntu/eoan/**/* text eol=lf
+ubuntu/focal/**/* text eol=lf
+ubuntu/xenial/**/* text eol=lf
+
 archlinux/* text eol=lf

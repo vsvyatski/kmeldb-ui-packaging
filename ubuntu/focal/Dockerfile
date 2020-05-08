@@ -5,6 +5,11 @@ ARG GROUP_ID
 
 ARG USER_NAME=builder
 ARG GROUP_NAME=builder
+ARG DEBIAN_FRONTEND=noninteractive
+
+# to avoid asking for timezone
+#RUN echo 'Europe/Minsk' > /etc/timezone
+#RUN dpkg-reconfigure -f noninteractive tzdata
 
 RUN apt-get update && apt-get install -y debhelper devscripts python3-pip python3-venv rsync
 
